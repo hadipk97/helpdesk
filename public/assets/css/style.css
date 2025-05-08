@@ -1,3 +1,24 @@
 body{
   backgound-color:#e1e1e1;
 }
+
+.fw-bold{
+  font-weight: bold;
+}
+
+.fw-semibold{
+  font-weight: 700;
+}
+
+.rounded-10{
+  border-radius: 10px;
+}
+
+.border-primary{
+  border: solid 1px #3E97FC;
+}
+
+.nav-link:hover {
+    background-color: #e9ecef;
+    transition: background-color 0.3s ease;
+}
