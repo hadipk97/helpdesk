@@ -22,3 +22,21 @@ body{
     background-color: #e9ecef;
     transition: background-color 0.3s ease;
 }
+
+.border-start-0 {
+    border-left: 0 !important; /* For LTR layouts */
+}
+
+.border-end-0 {
+    border-right: 0 !important; /* For LTR layouts */
+}
+
+.rounded-start-0{
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+.rounded-end-0{
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}

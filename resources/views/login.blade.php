@@ -21,7 +21,10 @@
                                 <span class="input-group-text bg-muted">
                                     <i class="fas fa-lock text-muted"></i>
                                 </span>
-                                <input type="password" id="password" name="password" class="form-control border-start-0" placeholder="Password" />
+                                <input type="password" id="password" name="password" class="form-control border-start-0 border-end-0" placeholder="Password" />
+                                <span class="input-group-text border-start-0 bg-white rounded-start-0" onclick="togglePassword()" style="cursor: pointer;">
+                                    <i id="toggleIcon" class="fas fa-eye-slash text-muted"></i>
+                                </span>
                             </div>
                             <div class="d-flex justify-content-between align-items-center mb-5 mt-2">
                                 <div class="form-check">
@@ -80,4 +83,22 @@
         </div>
     </div>
 </section>
+
+<script>
+    function togglePassword() {
+        const passwordInput = document.getElementById('password');
+        const toggleIcon = document.getElementById('toggleIcon');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggleIcon.classList.remove('fa-eye-slash');
+            toggleIcon.classList.add('fa-eye');
+        } else {
+            passwordInput.type = 'password';
+
+            toggleIcon.classList.remove('fa-eye');
+            toggleIcon.classList.add('fa-eye-slash');
+        }
+    }
+</script>
 @include('template.footer');
