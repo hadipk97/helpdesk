@@ -67,8 +67,8 @@ class TicketController extends Controller
 
                     return '<span class="badge badge-' . $color . '">' . $label . '</span>';
                 })
-                ->addColumn('created_at', function ($tickets) {
-                    return $tickets->created_at->format('d-m-Y');
+                ->addColumn('created_date', function ($tickets) {
+                    return $tickets->created_date->format('d-m-Y');
                 })
                 ->addColumn('action', function ($tickets) {
                     // Create buttons for edit, remove, and toggle activation status
@@ -96,14 +96,14 @@ class TicketController extends Controller
                     $ops .= '</div>';
                     return $ops;
                 })
-                ->rawColumns(['level_id', 'ticket_status', 'created_at', 'action'])
+                ->rawColumns(['level_id', 'ticket_status', 'created_date', 'action'])
                 ->make(true);
         }
     }
 
     public function add(Request $request)
     {
-        $latestTicket = Ticket::whereYear('created_at', date('Y'))
+        $latestTicket = Ticket::whereYear('created_date', date('Y'))
             ->orderBy('id', 'desc')
             ->first();
 
@@ -122,14 +122,14 @@ class TicketController extends Controller
             'service_id' => $request->serviceId,
             'level_id' => $request->level,
             'ticket_status' => $request->ticket_status,
-            'created_at' => date('Y-m-d'),
+            'created_date' => date('Y-m-d'),
             'created_by' => Auth::user()->username,
         ]);
 
         TicketHistory::create([
             'ticket_no' => $ticketNo,
             'status' => 'New',
-            'created_at' => date('Y-m-d'),
+            'created_date' => date('Y-m-d'),
             'created_by' => Auth::user()->username,
         ]);
 
@@ -188,10 +188,10 @@ class TicketController extends Controller
             ->addColumn('created_by', function ($histories) {
                 return '<span style="text-transform: capitalize;">' . $histories->created_by . '</span>';
             })
-            ->addColumn('created_at', function ($histories) {
-                return $histories->created_at->format('Y-m-d');
+            ->addColumn('created_date', function ($histories) {
+                return $histories->created_date->format('Y-m-d');
             })
-            ->rawColumns(['status', 'created_by', 'created_at'])
+            ->rawColumns(['status', 'created_by', 'created_date'])
             ->make(true);
     }
 
@@ -209,7 +209,7 @@ class TicketController extends Controller
             'ticket_no' => $request->ticket_no,
             'status' => 'Assigned Task to ' + $request->employee,
             'remarks' => $request->remarks,
-            'created_at' => date('Y-m-d'),
+            'created_date' => date('Y-m-d'),
             'created_by' => Auth::user()->username,
         ]);
 

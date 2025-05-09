@@ -9,6 +9,10 @@ class Service extends Model
 {
     use HasFactory;
 
+    protected $connection = 'mysql';
+    public $timestamps = false;
+    protected $table = 'hd_service';
+
     protected $fillable = [
         'service_name',
         'service_desc',

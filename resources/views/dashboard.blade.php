@@ -489,8 +489,8 @@
                     name: 'ticket_status'
                 },
                 {
-                    data: 'created_at',
-                    name: 'created_at'
+                    data: 'created_date',
+                    name: 'created_date'
                 },
                 {
                     data: 'action',

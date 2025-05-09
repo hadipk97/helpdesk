@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Cookie;
 class Ticket extends Model
 {
     use HasFactory;
+    protected $connection = 'mysql';
+    protected $table = 'hd_ticketing';
+
+    protected $casts = [
+        'created_date' => 'datetime',
+    ];
 
     protected $fillable = [
         'ticket_no',
@@ -25,7 +31,7 @@ class Ticket extends Model
         'level_id',
         'ticket_status',
         'created_by',
-        'created_at',
+        'created_date',
         'updated_at',
         'deleted_date'
     ];
@@ -64,7 +70,7 @@ class Ticket extends Model
     {
         $year = Carbon::now()->format('Y');
 
-        $count = DB::connection('mysql2')
+        $count = DB::connection('mysql')
             ->table('dt_task')
             ->where('task_date', 'like', $year . '%')
             ->count();
@@ -81,7 +87,7 @@ class Ticket extends Model
 
     public static function get_service_type()
     {
-        $servTypes = DB::connection('mysql2')
+        $servTypes = DB::connection('mysql')
             ->table('lt_serv_type')
             ->where('serv_stat', 1)
             ->orderBy('serv_desc', 'ASC')

@@ -43,33 +43,43 @@ return [
         //     'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         // ],
 
+        // 'mysql' => [
+        //     'driver' => 'mysql',
+        //     'url' => env('DATABASE_URL'),
+        //     'host' => env('DB_HOST', '127.0.0.1'),
+        //     'port' => env('DB_PORT', '3306'),
+        //     'database' => env('DB_DATABASE', 'helpdesk'),
+        //     'username' => env('DB_USERNAME', 'root'),
+        //     'password' => env('DB_PASSWORD', 'admin123'),
+        //     'unix_socket' => env('DB_SOCKET', ''),
+        //     'charset' => 'utf8mb4',
+        //     'collation' => 'utf8mb4_unicode_ci',
+        //     'prefix' => '',
+        //     'prefix_indexes' => true,
+        //     'strict' => true,
+        //     'engine' => null,
+        //     'options' => extension_loaded('pdo_mysql') ? array_filter([
+        //         PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+        //     ]) : [],
+        // ],
+
+        // 'mysql2' => [
+        //     'driver' => 'mysql',
+        //     'host' => env('DB2_HOST', 'srv1277.hstgr.io'),
+        //     'port' => env('DB2_PORT', '3306'),
+        //     'database' => env('DB2_DATABASE', 'u294942510_cpms'),
+        //     'username' => env('DB2_USERNAME', 'u294942510_cpms'),
+        //     'password' => env('DB2_PASSWORD', 'OJcb31uY7TMC'),
+        //     // ...
+        // ],
+
         'mysql' => [
             'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'helpdesk'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', 'admin123'),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => true,
-            'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
-        ],
-
-        'mysql2' => [
-            'driver' => 'mysql',
-            'host' => env('DB2_HOST', 'srv1277.hstgr.io'),
+            'host' => env('DB2_HOST', 'PKLAB-DB'),
             'port' => env('DB2_PORT', '3306'),
-            'database' => env('DB2_DATABASE', 'u294942510_cpms'),
-            'username' => env('DB2_USERNAME', 'u294942510_cpms'),
-            'password' => env('DB2_PASSWORD', 'OJcb31uY7TMC'),
+            'database' => env('DB2_DATABASE', 'cpms'),
+            'username' => env('DB2_USERNAME', 'sa'),
+            'password' => env('DB2_PASSWORD', 'Prismakhas123'),
             // ...
         ],
 

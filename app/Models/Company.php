@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
     use HasFactory;
+    protected $connection = 'mysql';
     protected $table = 'dt_campany';
+    
 
     protected $fillable = [
         'cpny_name',
