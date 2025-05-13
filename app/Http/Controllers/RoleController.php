@@ -31,7 +31,7 @@ class RoleController extends Controller
                     // Edit Button
                     $ops .= '<button type="button" data-target="#edit-role-modal" data-toggle="modal"
                     data-id="' . $roles->id . '"
-                    data-name="' . $roles->role_name  . '"
+                    data-name="' . $roles->role  . '"
                     data-desc="' . $roles->role_desc . '"
                     data-stat="' . $roles->role_stat . '"
                     class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>';

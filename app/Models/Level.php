@@ -17,7 +17,7 @@ class Level extends Model
         'level_duration',
         'level_respond',
         'isActive',
-        'created_at',
+        'created_date',
         'created_by',
         'updated_at',
         'deleted_date'

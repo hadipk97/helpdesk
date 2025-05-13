@@ -237,8 +237,8 @@
                                         <textarea id="remarks" name="remarks" class="form-control" placeholder="Remarks" maxlength="255"></textarea>
                                     @break
 
-                                    @case(6)
-                                    @case(7)
+                                    @case(2)
+                                    @case(8)
                                         <select id="remarks" name="remarks" class="form-control" placeholder="Remarks"
                                             maxlength="255">
                                             <option value="">Please Select</option>

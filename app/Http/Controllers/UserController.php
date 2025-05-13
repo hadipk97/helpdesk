@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\UserView;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
@@ -22,16 +23,13 @@ class UserController extends Controller
 
     public function getUsers()
     {
+
         if (request()->ajax()) {
 
-            return DataTables::of(User::withTrashed()->with('role'))
+            return DataTables::of(UserView::query())
                 ->addIndexColumn()
-                ->addColumn('role', function ($user) {
-                    if ($user->role) {
-                        return $user->role->role_name; // Fetch the role name
-                    } else {
-                        return '<span class="text-danger">No Role Assigned</span>';
-                    }
+                ->addColumn('roles', function ($user) {
+                    return $user->role ?? '<span class="text-danger">No Role Assigned</span>';
                 })
                 ->addColumn('action', function ($user) {
                     $ops = '<div class="btn-group">';
@@ -68,7 +66,7 @@ class UserController extends Controller
                     $ops .= '</div>';
                     return $ops;
                 })
-                ->rawColumns(['role', 'action'])
+                ->rawColumns(['roles', 'action'])
                 ->make(true);
         }
     }

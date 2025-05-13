@@ -52,7 +52,7 @@ class LevelController extends Controller
             'level_name' => $request->levelName,
             'level_duration' => $request->level_duration,
             'level_respond' => $request->level_respond,
-            'created_at' => date('Y-m-d'),
+            'created_date' => date('Y-m-d'),
             'created_by' => $request->name,
             'isActive' => 1,
         ]);

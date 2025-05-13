@@ -48,6 +48,7 @@ Route::get('/list_role', [UserController::class, 'getRoles'])->name('list_role')
 //Role
 Route::get('get_roles', [RoleController::class, 'getRoles'])->name('get_roles');
 Route::post('add_roles', [RoleController::class, 'store'])->name('add_roles');
+Route::post('edit_roles', [RoleController::class, 'update'])->name('edit_roles');
 
 // Category
 Route::get('category', [CategoryController::class, 'index'])->name('category');

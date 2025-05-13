@@ -71,7 +71,7 @@
                             <table id="role_table" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th style="width:50px">No</th>
+                                        <th style="width:60px">No</th>
                                         <th>Role Name</th>
                                         <th>Role Description</th>
                                         <th>Action</th>
@@ -306,30 +306,30 @@
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="text-center bg-info p-3">
-                    <h4 class="modal-title text-white" id="info-header-modalLabel">Add Role</h4>
+                    <h4 class="modal-title text-white" id="editRoleLabel">Add Role</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('add_roles') }}" method="post" class="pl-3 pr-3">
+                    <form action="{{ route('edit_roles') }}" method="post" class="pl-3 pr-3">
                         @csrf
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="role"> Role Name: </label>
-                                    <input type="text" id="role_name" name="role_name" class="form-control"
+                                    <input type="text" id="role-role" name="role_name" class="form-control"
                                         placeholder="Role Name" maxlength="50">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="role_desc"> Role Description: </label>
-                                    <input type="text" id="role_desc" name="role_desc" class="form-control"
+                                    <input type="text" id="role-desc" name="role_desc" class="form-control"
                                         placeholder="Role Description" maxlength="50">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="isActive"> IsActive: </label>
-                                    <select class="form-control" name="isActive" id="role_stat">
+                                    <select class="form-control" name="isActive" id="role-stat">
                                         <option value="1">Yes</option>
                                         <option value="2">No</option>
                                     </select>
@@ -389,7 +389,7 @@
                     response.roles.forEach(function(role) {
                         let selected = role.id == roleId ? "selected" : "";
                         roleDropdown.append(
-                            `<option value="${role.id}" ${selected}>${role.role_name}</option>`
+                            `<option value="${role.id}" ${selected}>${role.role}</option>`
                         );
                     });
 
@@ -400,6 +400,20 @@
                     alert("Failed to load roles.");
                 },
             })
+        });
+
+        $('#role_table').on('click', '[data-toggle="modal"]', function() {
+            var id = $(this).data('id');
+            var role_name = $(this).data('name');
+            var desc = $(this).data('desc');
+            var stat = $(this).data('stat');
+
+            $('#role-id').val(id);
+            $('#role-role').val(role_name);
+            $('#role-desc').val(desc);
+            $('#role-stat').val(stat);
+            $('#editRoleLabel').text('Update - ' +
+                role_name);
         });
 
         $('#user_table').DataTable({
@@ -414,8 +428,10 @@
             serverSide: true,
             ajax: '{{ route('get_users') }}',
             columns: [{
-                    data: 'id',
-                    name: 'id'
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
+                    orderable: false,
+                    searchable: false
                 },
                 {
                     data: 'username',
@@ -434,8 +450,8 @@
                     name: 'tel'
                 },
                 {
-                    data: 'role',
-                    name: 'role'
+                    data: 'roles',
+                    name: 'roles'
                 },
                 {
                     data: 'action',
@@ -456,12 +472,12 @@
             serverSide: true,
             ajax: '{{ route('get_roles') }}',
             columns: [{
-                    data: 'id',
-                    name: 'id'
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
                 },
                 {
-                    data: 'role_name',
-                    name: 'role_name'
+                    data: 'role',
+                    name: 'role'
                 },
                 {
                     data: 'role_desc',

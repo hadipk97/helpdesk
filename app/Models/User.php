@@ -15,8 +15,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
-
-
     protected $connection = 'mysql';
     public $timestamps = false;
     protected $table = 'login';
@@ -25,7 +23,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
-        'role_id',
+        'role',
         'n_penuh',
         'stat',
         'tel',
@@ -55,7 +53,6 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->belongsTo(Role::class, 'role_id', 'id');
+        return $this->belongsTo(Role::class, 'role');
     }
-
 }

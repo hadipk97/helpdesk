@@ -166,7 +166,7 @@ class TicketController extends Controller
     public function ticket_status($id)
     {
         $ticket = Ticket::with('company', 'product', 'service', 'level')->findOrFail($id);
-        $cpmsuser = User::whereIn('role_id', [6, 7])->get();
+        $cpmsuser = User::whereIn('role', [2, 7])->get();
         $service = Ticket::get_service_type();
         $level = Level::all();
 

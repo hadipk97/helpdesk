@@ -62,7 +62,7 @@ class AuthController extends Controller
                 'id' => Auth::user()->id,
                 'username' => Auth::user()->username,
                 'n_penuh' => Auth::user()->n_penuh,
-                'role' => Auth::user()->role_id
+                'role' => Auth::user()->role
             ]);
             Session::flash('toastr', ['type' => 'success', 'message' => 'Login Successfully']);
             return redirect()->route('dashboard');
