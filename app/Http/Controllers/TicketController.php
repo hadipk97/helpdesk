@@ -40,7 +40,7 @@ class TicketController extends Controller
                     ];
 
                     if (isset($levels[$tickets->level_id])) {
-                        return '<span class="badge ' . $levels[$tickets->level_id]['class'] . '">' .
+                        return '<span class="py-2 px-4 rounded-pill badge ' . $levels[$tickets->level_id]['class'] . '">' .
                             $levels[$tickets->level_id]['name'] . '</span>';
                     }
 
@@ -65,14 +65,14 @@ class TicketController extends Controller
                     $label = $statusLabels[$status] ?? 'No Status';
                     $color = $badgeColors[$status] ?? 'secondary';
 
-                    return '<span class="badge badge-' . $color . '">' . $label . '</span>';
+                    return '<span class="fw-semibold text-' . $color . '">' . $label . '</span>';
                 })
                 ->addColumn('created_date', function ($tickets) {
                     return $tickets->created_date->format('d-m-Y');
                 })
                 ->addColumn('action', function ($tickets) {
                     // Create buttons for edit, remove, and toggle activation status
-                    $ops = '<div class="btn-group">';
+                    $ops = '<div class="d-flex flex-row gap-2">';
 
                     // Edit Button
                     $ops .= '<button type="button" data-target="#edit-modal" data-toggle="modal"
@@ -86,12 +86,17 @@ class TicketController extends Controller
                     data-desc="' . $tickets->ticket_desc . '"
                     data-service="' . $tickets->service_id . '"
                     data-level="' . $tickets->level_id . '"
-                    class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>';
+
+
+                    class="btn btn-md btn-warning text-white px-2 rounded-4 d-flex flex-row justify-content-center custom-tooltip"><i class="fas fa-pen" ></i><span class="tooltip-text">Modify Ticket</span></button>';
                     // Assign Button
                     $ops .= '<a href=' . route("ticket_status", $tickets->id) . '
-                    class="btn btn-sm btn-success"><i class="fa fa-book"></i></a>';
+                    class="btn btn-md btn-success px-2 rounded-4 custom-tooltip"><i class="fa fa-book"></i><span class="tooltip-text text-capitalize">Ticket Status</span></a>';
                     // Remove Button
-                    $ops .= '<button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>';
+                    $ops .= '<button type="button" class="btn btn-md btn-danger px-2 rounded-4 custom-tooltip">
+  <i class="fa fa-trash"></i>
+  <span class="tooltip-text">Delete</span>
+</button>';
 
                     $ops .= '</div>';
                     return $ops;

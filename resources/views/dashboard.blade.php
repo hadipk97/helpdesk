@@ -1,145 +1,216 @@
-@include('template.header')
-@include('template.navbar')
-<br>
+@extends('layouts.dashboard')
+@section('sidebar')
+@include('sidebar.sidebar')
+@endsection
+@section('content')
 <div class="content">
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Dashboard</h1>
+                <div class="d-flex flex-row justify-content-between align-items-center px-4">
+                    <div>
+
+                        <span class="h6 fw-bold">Dashboard</span>
+
                     </div>
-                    <div class="col-sm-6">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Ticketing</li>
-                            </ol>
+                    <div>
+                        <div class="breadcrumb bg-white py-3">
+                            <div class="d-flex flex-row bg-white">
+                                <span class="breadcrumb-item fw-normal"><a href="#">Home</a></span>
+                                <span class="breadcrumb-separator mx-2">/</span>
+                                <span class="breadcrumb-item active fw-normal">Ticketing</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
     </div>
-    <div class="card">
+    <div class="card bg-light">
         <div class="card-body">
-            <div class="row">
-                <div class="col-sm-6">
+            <div class="row mx-2">
+                <div class="col-sm-6 px-2 ">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Ticket</h5>
+                            <h5 class="card-title fw-bold">Ticket</h5>
                             <p class="card-text">
                             <div class="list-group">
                                 <a href="/index.php/Ticketing/list?filter=New"
-                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                                    New<span class="badge badge-primary badge-pill">{{ $counts['New'] }}</span>
+                                    class="border-start-primary border-2 rounded-2 list-group-item list-group-item-action mb-2">
+                                    <div class="row ml-4">
+                                        <div class="col-lg-3"><i class="h3 fas fa-exclamation-circle text-primary"></i></div>
+                                        <div class="col-lg-6"><span class="fw-semibold">New</span></div>
+                                        <div class="col-lg-3"><span class="h5 fw-bold">{{ $counts['New'] }}</span></div>
+                                    </div>
+
                                 </a>
                                 <a href="/index.php/Ticketing/list?filter=InProgress"
-                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                                    In Progress<span class="badge badge-warning badge-pill"
-                                        style="color: #ffffff">{{ $counts['In Progress'] }}</span>
+                                    class="border-start-warning border-2 rounded-2 list-group-item list-group-item-action mb-2">
+                                    <div class="row ml-4">
+                                        <div class="col-lg-3"><i class="h3 fas fa-clock text-warning"></i></div>
+                                        <div class="col-lg-6"><span class="fw-semibold">In Progress</span></div>
+                                        <div class="col-lg-3"><span class="h5 fw-bold">{{ $counts['In Progress'] }}</span></div>
+                                    </div>
                                 </a>
                                 <a href="/index.php/Ticketing/list?filter=Completed"
-                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                                    Completed<span class="badge badge-info badge-pill">{{ $counts['Completed'] }}</span>
+                                    class="border-start-success border-2 rounded-2 list-group-item list-group-item-action mb-2">
+                                    <div class="row ml-4">
+                                        <div class="col-lg-3"><i class="h3 fas fa-check-circle text-success"></i></div>
+                                        <div class="col-lg-6"><span class="fw-semibold">Completed</span></div>
+                                        <div class="col-lg-3"><span class="h5 fw-bold">{{ $counts['Completed'] }}</span></div>
+                                    </div>
+
                                 </a>
                                 <a href="/index.php/Ticketing/list?filter=Close"
-                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                                    Close<span class="badge badge-success badge-pill">{{ $counts['Close'] }}</span>
+                                    class="border-start-danger border-2 rounded-2 list-group-item list-group-item-action">
+                                    <div class="row ml-4">
+                                        <div class="col-lg-3"><i class="h3 fas fa-times-circle text-danger"></i></div>
+                                        <div class="col-lg-6"><span class="fw-semibold">Close</span></div>
+                                        <div class="col-lg-3"><span class="h5 fw-bold">{{ $counts['Close'] }}</span></div>
+                                    </div>
+
                                 </a>
                             </div>
                             </p>
                         </div>
                     </div><br />
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6 px-2">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Service Type</h5>
-                            <p class="card-text">
-                            <div class="list-group">
-                                <a href="/index.php/Ticketing/list?filter=Software"
-                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                                    Software
-                                    <span class="badge  badge-pill"
-                                        style="background-color: #d966ff; color: #ffffff">{{ $countsService['Software'] }}</span>
-                                </a>
-                                <a href="/index.php/Ticketing/list?filter=Hardware"
-                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                                    Hardware
-                                    <span class="badge badge-pill"
-                                        style="background-color: #d966ff; color: #ffffff">{{ $countsService['Hardware'] }}</span>
-                                </a>
-                                <a href="/index.php/Ticketing/list?filter=License"
-                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                                    License
-                                    <span class="badge badge-pill"
-                                        style="background-color: #d966ff; color: #ffffff">{{ $countsService['License'] }}</span>
-                                </a>
-                                <a href="/index.php/Ticketing/list?filter=Other"
-                                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                                    Other
-                                    <span class="badge badge-pill"
-                                        style="background-color: #d966ff; color: #ffffff">{{ $countsService['Other'] }}</span>
-                                </a>
+                            <h5 class="card-title fw-bold">Service Type</h5>
+                            <div class="row mt-2 pt-2">
+                                <div class="col-lg-6 p-2">
+                                    <a href="/index.php/Ticketing/list?filter=Software" class="text-decoration-none text-dark">
+                                        <div class="card card-software rounded-8 p-4 text-decoration-none">
+                                            <div class="row align-items-center">
+                                                <div class="col-lg-6 d-flex flex-column align-items-center">
+                                                    <div class="mb-2 fw-semibold">Software</div>
+                                                    <div class="h5 fw-bold">{{ $countsService['Software'] }}</div>
+                                                </div>
+                                                <div class="col-lg-5 d-flex justify-content-end align-items-end">
+                                                    <div class="rounded-circle p-3 bg-white">
+                                                        <i class="h3 fas fa-laptop" style="color:#1618AA;"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                </div>
+                                <div class="col-lg-6 p-2">
+                                    <a href="/index.php/Ticketing/list?filter=Hardware" class="text-decoration-none text-dark">
+                                        <div class="card card-hardware rounded-8 py-4 px-4">
+                                            <div class="row align-items-center">
+                                                <div class="col-lg-6 d-flex flex-column align-items-center">
+                                                    <div class="mb-2 fw-semibold">Hardware</div>
+                                                    <div class="h5 fw-bold">{{ $countsService['Hardware'] }}</div>
+                                                </div>
+                                                <div class="col-lg-5 d-flex justify-content-end align-items-end">
+                                                    <div class="rounded-circle p-3 bg-white">
+                                                        <i class="h3 fas fa-server" style="color:#AE4011;"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                </div>
                             </div>
-                            </p>
+                            <div class="row mb-1">
+                                <div class="col-lg-6 p-2">
+                                    <a href="/index.php/Ticketing/list?filter=License" class="text-decoration-none text-dark">
+                                        <div class="card card-license rounded-8 py-4 px-4">
+                                            <div class="row align-items-center">
+                                                <div class="col-lg-6 d-flex flex-column align-items-center">
+                                                    <div class="mb-2 fw-semibold">License</div>
+                                                    <div class="h5 fw-bold">{{ $countsService['License'] }}</div>
+                                                </div>
+                                                <div class="col-lg-5 d-flex justify-content-end align-items-end">
+                                                    <div class="rounded-circle p-3 bg-white">
+                                                        <i class="h2 fas fa-medal" style="color:#1B8E1B;"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                </div>
+                                <div class="col-lg-6 p-2">
+                                    <a href="/index.php/Ticketing/list?filter=Other" class="text-decoration-none text-dark">
+                                        <div class="card card-other rounded-8 py-4 px-4">
+                                            <div class="row align-items-center">
+                                                <div class="col-lg-6 d-flex flex-column align-items-center">
+                                                    <div class="mb-2 fw-semibold">Other</div>
+                                                    <div class="h5 fw-bold">{{ $countsService['Other'] }}</div>
+                                                </div>
+                                                <div class="col-lg-5 d-flex justify-content-end align-items-end">
+                                                    <div class="rounded-circle p-3 bg-white">
+                                                        <i class="h3 fas fa-ellipsis-h" style="color:#151515;"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                </div>
+
+                            </div>
 
                         </div>
-                    </div><br />
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-md-8 mt-2">
-                                <h3 class="card-title">List of Ticket</h3>
-                            </div>
-                            <div class="col-md-2">
-                                <a class="btn btn-block btn-success" href="/index.php/Ticketing/spreadsheet"> <i
-                                        class="fa fa-book"> </i> Export</a>
-                            </div>
-                            <div class="col-md-2">
-                                <button type="button" class="btn btn-block btn-success" data-toggle="modal"
-                                    data-target="#add-modal" title="Add">
-                                    <i class="fa fa-plus"></i> Add
-                                </button>
+            <div>
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="mt-3 mx-4">
+                            <div class="d-flex flex-row justify-content-between mt-2">
+                                <div>
+                                    <h5 class="card-title fw-bold">List of Tickets</h5>
+                                </div>
+                                <div class="d-flex flex-row gap-2">
+
+                                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal"
+                                        data-target="#add-modal" title="Add">
+                                        <i class="fa fa-plus"></i> New Ticket
+                                    </button>
+
+                                </div>
                             </div>
                         </div>
+                        <div class="card-body">
+                            <table id="ticket_table" class="table">
+                                <thead>
+                                    <tr>
+
+                                        <th>Ticket No.</th>
+                                        <th>Requester</th>
+                                        <!-- <th>Client Name</th> -->
+                                        <th>Ticket subject</th>
+                                        <!-- <th>Product id</th> -->
+                                        <!-- <th>Ticket desc</th> -->
+                                        <th>Service</th>
+                                        <th>Level </th>
+                                        <th>Ticket Status</th>
+                                        <th>Created Date</th>
+                                        <th>Action
+                                            {{-- <th>Deadline Date</th> --}}
+                                            <!-- <th>Deleted date</th> -->
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
                     </div>
-                    <div class="card-body">
-                        <table id="ticket_table" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Ticket No.</th>
-                                    <th>Requester</th>
-                                    <!-- <th>Client Name</th> -->
-                                    <th>Ticket subject</th>
-                                    <!-- <th>Product id</th> -->
-                                    <!-- <th>Ticket desc</th> -->
-                                    <th>Service</th>
-                                    <th>Level </th>
-                                    <th>Ticket Status</th>
-                                    <th>Created Date</th>
-                                    <th>Action
-                                        {{-- <th>Deadline Date</th> --}}
-                                        <!-- <th>Deleted date</th> -->
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
+                    <!-- /.card -->
                 </div>
-                <!-- /.card -->
             </div>
         </div>
+
+
     </div>
 </div>
 <!-- Add modal template -->
@@ -171,7 +242,7 @@
                                 <!-- <input type="number" id="clientId" name="clientId" class="form-control" placeholder="Client id" maxlength="11" number="true" > -->
                                 <select name="clientId" class="custom-select">
                                     @foreach ($company as $comp)
-                                        <option value="{{ $comp->id }}">{{ $comp->cpny_name }}</option>
+                                    <option value="{{ $comp->id }}">{{ $comp->cpny_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -202,7 +273,7 @@
                                 <label for="productId"> Product Name: </label>
                                 <select name="productId" class="custom-select">
                                     @foreach ($product as $prod)
-                                        <option value="{{ $prod->id }}">{{ $prod->product_name }}</option>
+                                    <option value="{{ $prod->id }}">{{ $prod->product_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -232,7 +303,7 @@
                                 <label for="serviceId"> Service: </label>
                                 <select name="serviceId" class="form-control">
                                     @foreach ($service as $serv)
-                                        <option value="{{ $serv->id }}">{{ $serv->service_name }}</option>
+                                    <option value="{{ $serv->id }}">{{ $serv->service_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -242,7 +313,7 @@
                                 <label for="levelId"> Level: </label>
                                 <select name="level" class="form-control">
                                     @foreach ($level as $lev)
-                                        <option value="{{ $lev->id }}">{{ $lev->level_name }}</option>
+                                    <option value="{{ $lev->id }}">{{ $lev->level_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -287,7 +358,7 @@
                                 <label for="clientId"> Client: </label>
                                 <select id="clientId" name="clientId" class="custom-select">
                                     @foreach ($company as $comp)
-                                        <option value="{{ $comp->id }}">{{ $comp->cpny_name }}</option>
+                                    <option value="{{ $comp->id }}">{{ $comp->cpny_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -318,7 +389,7 @@
                                 <label for="productId"> Product Name: </label>
                                 <select id="productId" name="productId" class="custom-select">
                                     @foreach ($product as $prod)
-                                        <option value="{{ $prod->id }}">{{ $prod->product_name }}</option>
+                                    <option value="{{ $prod->id }}">{{ $prod->product_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -348,7 +419,7 @@
                                 <label for="serviceId"> Service: </label>
                                 <select id="serviceId" name="serviceId" class="form-control">
                                     @foreach ($service as $serv)
-                                        <option value="{{ $serv->id }}">{{ $serv->service_name }}</option>
+                                    <option value="{{ $serv->id }}">{{ $serv->service_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -358,7 +429,7 @@
                                 <label for="levelId"> Level: </label>
                                 <select id="levelId" name="level" class="form-control">
                                     @foreach ($level as $lev)
-                                        <option value="{{ $lev->id }}">{{ $lev->level_name }}</option>
+                                    <option value="{{ $lev->id }}">{{ $lev->level_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -375,6 +446,70 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>
+<script>
+    $(document).ready(function() {
+        $('#sidebarCollapse').on('click', function() {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+{{-- <!-- jQuery (required for Select2) -->
+<script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script> --}}
+
+<!-- Select2 JS -->
+<script src="{{ asset('assets/js/select2.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        $('.select2').select2();
+    });
+</script>
+<script>
+    @if(Session::has('toastr'))
+    var toastrData = @json(Session::get('toastr'));
+    toastr[toastrData.type](toastrData.message);
+    @endif
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+
+        const showNavbar = (toggleId, navId, bodyId, headerId) => {
+            const toggle = document.getElementById(toggleId),
+                nav = document.getElementById(navId),
+                bodypd = document.getElementById(bodyId),
+                headerpd = document.getElementById(headerId)
+
+            // Validate that all variables exist
+            if (toggle && nav && bodypd && headerpd) {
+                toggle.addEventListener('click', () => {
+                    // show navbar
+                    nav.classList.toggle('show')
+                    // change icon
+                    toggle.classList.toggle('bx-x')
+                    // add padding to body
+                    bodypd.classList.toggle('body-pd')
+                    // add padding to header
+                    headerpd.classList.toggle('body-pd')
+                })
+            }
+        }
+
+        showNavbar('header-toggle', 'nav-bar', 'body-pd', 'header')
+
+        /*===== LINK ACTIVE =====*/
+        const linkColor = document.querySelectorAll('.nav_link')
+
+        function colorLink() {
+            if (linkColor) {
+                linkColor.forEach(l => l.classList.remove('active'))
+                this.classList.add('active')
+            }
+        }
+        linkColor.forEach(l => l.addEventListener('click', colorLink))
+
+        // Your code to run since DOM is loaded and ready
+    });
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const typeSelect = document.querySelector("#typeOfProduct");
@@ -451,7 +586,7 @@
 
         $('#ticket_table').DataTable({
             paging: true,
-            lengthChange: false,
+            lengthChange: true,
             searching: true,
             ordering: true,
             info: true,
@@ -460,10 +595,7 @@
             processing: true,
             serverSide: true,
             ajax: '{{ route('get_ticket') }}',
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                },
+            columns: [
                 {
                     data: 'ticket_no',
                     name: 'ticket_no'
@@ -503,4 +635,4 @@
 
     });
 </script>
-@include('template.footer')
+@endsection

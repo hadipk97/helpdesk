@@ -11,28 +11,28 @@
                             <h2 class="mb-3 pb-3 mt-4 text-center fw-semibold" style="font-family: 'Poppins', sans-serif !important;">Create account</h2>
 
                             <div class="input-group input-group-lg mb-4">
-                                <span class="input-group-text bg-muted">
+                                <span class="rounded-end-0 input-group-text bg-muted">
                                     <i class="fas fa-user text-muted"></i>
                                 </span>
                                 <input type="text" id="username" name="username" class="form-control border-start-0" placeholder="Username" />
                             </div>
 
                             <div class="input-group input-group-lg mb-4">
-                                <span class="input-group-text bg-muted">
+                                <span class="rounded-end-0 input-group-text bg-muted">
                                     <i class="fas fa-address-card text-muted"></i>
                                 </span>
                                 <input type="text" id="fullname" name="fullname" class="form-control border-start-0" placeholder="Fullname" />
                             </div>
 
                             <div class="input-group input-group-lg mb-4">
-                                <span class="input-group-text bg-muted">
+                                <span class="rounded-end-0 input-group-text bg-muted">
                                     <i class="fas fa-envelope text-muted"></i>
                                 </span>
                                 <input type="email" id="email" name="email" class="form-control border-start-0" placeholder="Email" />
                             </div>
 
                             <div class="input-group input-group-lg mb-5">
-                                <span class="input-group-text bg-muted">
+                                <span class="rounded-end-0 input-group-text bg-muted">
                                     <i class="fas fa-lock text-muted"></i>
                                 </span>
                                 <input type="password" id="password" name="password" class="form-control border-start-0" placeholder="Password" />
