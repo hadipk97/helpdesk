@@ -214,24 +214,28 @@
     </div>
 </div>
 <!-- Add modal template -->
-<div id="add-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="add-modal" class="modal fade rounded-8" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="text-center bg-info p-3">
-                <h4 class="modal-title text-white" id="info-header-modalLabel">Add New Ticket</h4>
-            </div>
+
             <div class="modal-body">
-                <form action="{{ route('ticket_add') }}" method="POST" id="add-form" class="pl-3 pr-3">
+                <div class="d-flex flex-row justify-content-between p-3">
+                    <h5 class="modal-title fw-bold" id="info-header-modalLabel">Add New Ticket</h5>
+                    <button type="button" class="btn-transparent" data-dismiss="modal">
+                        <i class="h5 fa fa-times"></i>
+                    </button>
+                </div>
+                <form action="{{ route('ticket_add') }}" method="POST" id="add-form" class="px-4 mt-4">
                     @csrf
                     <div class="row">
                         <input type="hidden" id="ticket_status" name="ticket_status" value=1>
                         <input type="hidden" id="createdBy" name="createdBy" maxlength="255"
                             value="{{ Auth::user()->n_penuh }}" readonly="readonly">
                     </div>
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="requester"> Requester <span class="text-danger">*</span> :</label>
+                                <label for="requester"> Requester (Email)<span class="text-danger">*</span> :</label>
                                 <input type="text" name="requester" class="form-control" placeholder="Requester"
                                     maxlength="255" required>
                             </div>
@@ -240,7 +244,7 @@
                             <div class="form-group">
                                 <label for="clientId"> Client: </label>
                                 <!-- <input type="number" id="clientId" name="clientId" class="form-control" placeholder="Client id" maxlength="11" number="true" > -->
-                                <select name="clientId" class="custom-select">
+                                <select name="clientId" class="form-control">
                                     @foreach ($company as $comp)
                                     <option value="{{ $comp->id }}">{{ $comp->cpny_name }}</option>
                                     @endforeach
@@ -255,7 +259,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Type of Product: </label>
@@ -267,11 +271,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" id="hardwareId" style="display: none">
+                    <div class="row mb-2" id="hardwareId" style="display: none">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="productId"> Product Name: </label>
-                                <select name="productId" class="custom-select">
+                                <select name="productId" class="form-control">
                                     @foreach ($product as $prod)
                                     <option value="{{ $prod->id }}">{{ $prod->product_name }}</option>
                                     @endforeach
@@ -279,25 +283,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="ticketDesc"> Description: </label>
-                                <textarea name="ticketDesc" class="form-control compose-textarea" rows="8" cols="10">
-                                    Serial No:
-                                    License No:
-                                </textarea>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="ticketDesc"> Attachment: </label>
-                                <input id="attachment-1" name="attachment[]" type="file" class="file"
-                                    data-show-upload="true" data-show-caption="true" multiple>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="serviceId"> Service: </label>
@@ -319,12 +305,35 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="btn-group">
-                            <button type="submit" class="btn btn-success" id="add-form-btn">Add</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <div class="row mb-2">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="ticketDesc"> Description: </label>
+                                <textarea name="ticketDesc" class="form-control compose-textarea" rows="8" cols="10" style="text-align: left;">
+Serial No:
+License No:
+</textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="ticketDesc"> Attachment: </label>
+                                <input id="attachment-1" name="attachment[]" type="file" class="file"
+                                    data-show-upload="true" data-show-caption="true" multiple>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="row mb-2">
+                        <div class="col-lg-6">
+                            <button type="button" class="btn btn-outline-light w-100 btn-lg rounded-8" data-dismiss="modal">Cancel</button>
+                        </div>
+                        <div class="col-lg-6">
+                            <button type="submit" class="btn btn-success w-100 btn-lg rounded-8" id="add-form-btn">Add</button>
+                        </div>
+                    </div>
+
+
                 </form>
             </div>
         </div><!-- /.modal-content -->
@@ -446,6 +455,7 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>
+
 <script>
     $(document).ready(function() {
         $('#sidebarCollapse').on('click', function() {
@@ -460,8 +470,22 @@
 <!-- Select2 JS -->
 <script src="{{ asset('assets/js/select2.min.js') }}"></script>
 <script>
-    $(document).ready(function() {
-        $('.select2').select2();
+    // $(document).ready(function() {
+    //     $('.select2').select2();
+    // });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const sidebarToggle = document.getElementById("sidebarCollapse");
+        const sidebar = document.getElementById("sidebar");
+
+        // Hide by default on small screens
+        if (window.innerWidth <= 768) {
+            sidebar.classList.remove("active"); // ensure hidden initially
+        }
+
+        sidebarToggle.addEventListener("click", function() {
+            sidebar.classList.toggle("active");
+        });
     });
 </script>
 <script>
@@ -510,129 +534,5 @@
         // Your code to run since DOM is loaded and ready
     });
 </script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const typeSelect = document.querySelector("#typeOfProduct");
-        const productDiv = document.querySelector("#hardwareId");
 
-        function toggleProductDiv() {
-            if (typeSelect.value == 1 || typeSelect.value == 2) {
-                productDiv.style.display = "block";
-            } else {
-                productDiv.style.display = "none";
-            }
-        }
-
-        typeSelect.addEventListener("change", toggleProductDiv);
-
-        toggleProductDiv()
-    });
-
-    document.addEventListener("DOMContentLoaded", function() {
-        const tSelect = document.querySelector("#type");
-        const pDiv = document.querySelector("#hId");
-
-        function togglePDiv() {
-            if (tSelect.value == 1 || tSelect.value == 2) {
-                pDiv.style.display = "block";
-            } else {
-                pDiv.style.display = "none";
-            }
-        }
-
-        tSelect.addEventListener("change", togglePDiv);
-
-        togglePDiv()
-    });
-
-    $(document).ready(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $('#ticket_table').on('click', '[data-toggle="modal"]', function() {
-            // Retrieve data from the clicked button
-            var ticketId = $(this).data('id');
-            var ticketNo = $(this).data('ticket_no');
-            var requester = $(this).data('requester');
-            var client = $(this).data('client');
-            var subject = $(this).data('subject');
-            var desc = $(this).data('desc');
-            var product = $(this).data('product');
-            var product_type = $(this).data('product_type');
-            var service = $(this).data('service');
-            var level = $(this).data('level');
-
-            $('#ticketId').val(ticketId);
-            $('#requester').val(requester);
-            $('#clientId').val(client);
-            $('#ticketSubject').val(subject);
-            $('#type').val(product_type);
-            $('#productId').val(product);
-            $('#serviceId').val(service);
-            $('#levelId').val(level);
-
-            if (product_type == 1 || product_type == 2) {
-                $('#hId').show();
-            } else {
-                $('#hId').hide();
-            }
-            // Optionally, you can modify the modal title or do other UI adjustments here
-            $('#editModalLabel').text('Edit Ticket - ' +
-                ticketNo); // Optional: Change title dynamically
-        });
-
-        $('#ticket_table').DataTable({
-            paging: true,
-            lengthChange: true,
-            searching: true,
-            ordering: true,
-            info: true,
-            autoWidth: false,
-            responsive: true,
-            processing: true,
-            serverSide: true,
-            ajax: '{{ route('get_ticket') }}',
-            columns: [
-                {
-                    data: 'ticket_no',
-                    name: 'ticket_no'
-                },
-                {
-                    data: 'requester',
-                    name: 'requester'
-                },
-                {
-                    data: 'ticket_subject',
-                    name: 'ticket_subject'
-                },
-                {
-                    data: 'service_id',
-                    name: 'service_id'
-                },
-                {
-                    data: 'level_id',
-                    name: 'level_id'
-                },
-                {
-                    data: 'ticket_status',
-                    name: 'ticket_status'
-                },
-                {
-                    data: 'created_date',
-                    name: 'created_date'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                } // The action buttons
-            ]
-        });
-
-    });
-</script>
 @endsection

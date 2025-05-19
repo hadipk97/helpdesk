@@ -89,6 +89,34 @@ body {
     background: #002c50;
     color: #fff;
     overflow-y: auto;
+    transition: all 0.3s ease;
+}
+
+/* Hide and change sidebar layout on small screens */
+@media (max-width: 768px) {
+    #sidebar {
+        position: absolute;
+        top: 60px; /* adjust based on navbar height */
+        left: 0;
+        width: 100%;
+        height: auto;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        z-index: 999;
+    }
+
+    #sidebar.active {
+        max-height: 500px; /* allow it to expand when toggled */
+    }
+
+    #sidebar ul.components {
+        padding: 10px 0;
+    }
+
+    #sidebar ul li a {
+        padding: 10px 20px;
+    }
 }
 
 .main-content {
@@ -185,6 +213,8 @@ a.article:hover {
     background: #6d7fcc !important;
     color: #fff !important;
 }
+
+
 
 /* ---------------------------------------------------
     CONTENT STYLE

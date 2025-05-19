@@ -306,8 +306,12 @@ progress {
     -webkit-appearance: none;
 }
 ::-webkit-file-upload-button {
-    font: inherit;
-    -webkit-appearance: button;
+    background-color: #FFFFFF;
+    color: #007bff;
+    border: 1px solid #007bff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
 }
 output {
     display: inline-block;
@@ -1924,10 +1928,27 @@ pre code {
     color: #495057;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
+    border: 1px solid #D5D7DA;
+    border-radius: 0.5rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
+select.form-control{
+    border: 1px solid #D5D7DA;
+    border-radius: 0.5rem;
+}
+
+select.form-control {
+    padding-right: 2.5rem; 
+    background-image: url('data:image/svg+xml;utf8,<svg fill="gray" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
     .form-control {
         transition: none;
@@ -2434,6 +2455,25 @@ a.btn.disabled,
 fieldset:disabled a.btn {
     pointer-events: none;
 }
+
+.file-input .btn-file {
+    background-color: #007bff; /* Your desired color */
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-weight: 500;
+}
+
+.file-input .btn-file:hover {
+    background-color: #0056b3; /* Darker on hover */
+}
+
+.btn-transparent{
+    color: inherit;
+    background-color: transparent;
+    border: none;
+}
 .btn-primary {
     color: #fff;
     background-color: #007bff;
@@ -2506,8 +2546,8 @@ fieldset:disabled a.btn {
 }
 .btn-success {
     color: #fff;
-    background-color: #28a745;
-    border-color: #28a745;
+    background-color: #22C55E;
+    border-color: #22C55E;
 }
 .btn-success:hover {
     color: #fff;
@@ -2895,13 +2935,14 @@ fieldset:disabled a.btn {
     box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
 }
 .btn-outline-light {
-    color: #f8f9fa;
-    border-color: #f8f9fa;
+    color: #212529;
+    border-width: 2px;
+    border-color: #E4E4E7;
 }
 .btn-outline-light:hover {
     color: #212529;
-    background-color: #f8f9fa;
-    border-color: #f8f9fa;
+    background-color: #E4E4E7;
+    border-color: #E4E4E7;
 }
 .btn-outline-light.focus,
 .btn-outline-light:focus {
