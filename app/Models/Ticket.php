@@ -6,18 +6,21 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Facades\Cookie;
 
 class Ticket extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     protected $connection = 'mysql';
     protected $table = 'hd_ticketing';
+    public $timestamps = false;
 
     protected $casts = [
         'created_date' => 'datetime',
     ];
+    protected $dates = ['deleted_date'];
 
     protected $fillable = [
         'ticket_no',
@@ -32,9 +35,13 @@ class Ticket extends Model
         'ticket_status',
         'created_by',
         'created_date',
-        'updated_at',
         'deleted_date'
     ];
+
+    public function getDeletedAtColumn()
+    {
+        return 'deleted_date';
+    }
 
     public function company()
     {
@@ -73,14 +80,21 @@ class Ticket extends Model
         $count = DB::connection('mysql')
             ->table('dt_task')
             ->where('task_date', 'like', $year . '%')
-            ->count();
+            ->orderBy('task_no', 'desc')
+            ->first();
 
         $userid = Session::get('id');
 
-        $taskNo = 'T/' . date('y/m') . '/' . $userid . '-' . str_pad(($count + 1), 3, '0', STR_PAD_LEFT);
+        $lastThreeDigits = null;
+
+        if ($count && isset($count->task_no)) {
+            preg_match('/(\d{3})$/', $count->task_no, $matches);
+            $lastThreeDigits = $matches[1] ?? null;
+        }
+
+        $taskNo = 'T/' . date('y/m') . '/' . $userid . '-' . str_pad(($lastThreeDigits + 1), 3, '0', STR_PAD_LEFT);
 
         return [
-            'count' => $count,
             'task_no' => $taskNo
         ];
     }

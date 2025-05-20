@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class TicketHistory extends Model
 {
     use HasFactory;
+    protected $connection = 'mysql';
+    public $timestamps = false;
+    protected $table = 'hd_ticketing_history';
 
     protected $fillable = [
         'ticket_no',
-        'status',
+        'ticket_status',
         'created_at',
-        'created_by',
         'remarks'
     ];
 

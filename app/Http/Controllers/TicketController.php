@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Level;
 use App\Models\Ticket;
@@ -94,9 +95,9 @@ class TicketController extends Controller
                     class="btn btn-md btn-success px-2 rounded-4 custom-tooltip"><i class="fa fa-book"></i><span class="tooltip-text text-capitalize">Ticket Status</span></a>';
                     // Remove Button
                     $ops .= '<button type="button" class="btn btn-md btn-danger px-2 rounded-4 custom-tooltip">
-  <i class="fa fa-trash"></i>
-  <span class="tooltip-text">Delete</span>
-</button>';
+                    <i class="fa fa-trash"></i>
+                    <span class="tooltip-text">Delete</span>
+                    </button>';
 
                     $ops .= '</div>';
                     return $ops;
@@ -108,13 +109,16 @@ class TicketController extends Controller
 
     public function add(Request $request)
     {
-        $latestTicket = Ticket::whereYear('created_date', date('Y'))
+        $currentYear = Carbon::now()->year;
+        $today = Carbon::now()->toDateString();
+
+        $latestTicket = Ticket::whereYear('created_date', $currentYear)
             ->orderBy('id', 'desc')
             ->first();
 
         $runningNumber = $latestTicket ? (intval(substr($latestTicket->ticket_no, -4)) + 1) : 1;
 
-        $ticketNo = "#" . date('Y') . "-" . str_pad($runningNumber, 4, '0', STR_PAD_LEFT);
+        $ticketNo = "#" . $currentYear . "-" . str_pad($runningNumber, 4, '0', STR_PAD_LEFT);
 
         Ticket::create([
             'ticket_no' => $ticketNo,
@@ -133,9 +137,8 @@ class TicketController extends Controller
 
         TicketHistory::create([
             'ticket_no' => $ticketNo,
-            'status' => 'New',
-            'created_date' => date('Y-m-d'),
-            'created_by' => Auth::user()->username,
+            'ticket_status' => 'New',
+            'created_at' => date('Y-m-d'),
         ]);
 
         Session::flash('toastr', ['type' => 'success', 'message' => 'Ticket has been created successfully!']);
@@ -165,13 +168,15 @@ class TicketController extends Controller
 
     public function destroy(Ticket $ticket)
     {
-        //
+        $ticket->delete();
+        Session::flash('toastr', ['type' => 'success', 'message' => 'Ticket deleted successfully!']);
+        return redirect()->route('dashboard');
     }
 
     public function ticket_status($id)
     {
         $ticket = Ticket::with('company', 'product', 'service', 'level')->findOrFail($id);
-        $cpmsuser = User::whereIn('role', [2, 7])->get();
+        $cpmsuser = User::whereIn('role', [2, 8])->where('stat', 1)->get();
         $service = Ticket::get_service_type();
         $level = Level::all();
 
@@ -187,16 +192,13 @@ class TicketController extends Controller
 
         return DataTables::of($histories)
             ->addIndexColumn()
-            ->addColumn('status', function ($histories) {
-                return '<span class="badge badge-primary">' . $histories->status . '</span>';
+            ->addColumn('ticket_status', function ($histories) {
+                return '<span class="badge badge-primary">' . $histories->ticket_status . '</span>';
             })
-            ->addColumn('created_by', function ($histories) {
-                return '<span style="text-transform: capitalize;">' . $histories->created_by . '</span>';
+            ->addColumn('created_at', function ($histories) {
+                return Carbon::parse($histories->created_at)->format('Y-m-d');
             })
-            ->addColumn('created_date', function ($histories) {
-                return $histories->created_date->format('Y-m-d');
-            })
-            ->rawColumns(['status', 'created_by', 'created_date'])
+            ->rawColumns(['ticket_status', 'created_at'])
             ->make(true);
     }
 
@@ -218,7 +220,7 @@ class TicketController extends Controller
             'created_by' => Auth::user()->username,
         ]);
 
-        DB::connection('mysql2')
+        DB::connection('mysql')
             ->table('dt_task')->insert(
                 [
                     'task_no' => $request->task_no,

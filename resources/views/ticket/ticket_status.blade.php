@@ -96,7 +96,6 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Ticket status</th>
-                                        <th>Updated by</th>
                                         <th>Date</th>
                                         <th>Remarks</th>
                                     </tr>
@@ -133,25 +132,23 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="createdAt"> Start Date: </label>
-                                <input type="date" id="createdAt" name="start_date" class="form-control"
-                                    dateISO="true">
+                                <label for="createdAt"> Start Date: <font color="red"> *</font></label>
+                                <input type="date" id="createdAt" name="start_date" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="createdAt"> End Date: </label>
-                                <input type="date" id="createdAt" name="end_date" class="form-control"
-                                    dateISO="true">
+                                <label for="createdAt"> End Date: <font color="red"> *</font></label>
+                                <input type="date" id="createdAt" name="end_date" class="form-control" required>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Employee Name</label>
+                                <label>Employee Name <font color="red"> *</font></label>
                                 <select name="employee[]" class="form-control select2" multiple="multiple"
-                                    style="width: 100%">
+                                    style="width: 100%" required>
                                     @foreach ($cpmsuser as $user)
                                         <option value="{{ $user->id }}">
                                             {{ $user->n_penuh }}
@@ -162,19 +159,18 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Appointment Time</label>
+                                <label>Appointment Time <font color="red"> *</font></label>
                                 <input type="time" name="appointment_time" class="form-control timepicker"
-                                    value="{{ now()->format('H:i') }}">
+                                    value="{{ now()->format('H:i') }}" required>
                             </div>
                         </div>
-
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Service Type</label>
+                                <label>Service Type <font color="red"> *</font></label>
                                 <select name="service[]" class="form-control select2" multiple="multiple"
-                                    style="width: 100%">
+                                    style="width: 100%" required>
                                     @foreach ($service as $id => $desc)
                                         <option value="{{ $id }}">
                                             {{ $desc }}
@@ -183,85 +179,36 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    {{-- <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="ticketStatus"> Ticket status: </label>
-                                <select id="ticketStatus" name="ticketStatus" class="form-control"
-                                    placeholder="Ticket status" maxlength="45">
-
-                                    @switch (Auth::user()->role_id)
-                                        @case (8)
-                                            <option value="Rechecking">Rechecking</option>
-                                            <option value="Close">Close</option>';
-                                        @break
-
-                                        @case (1)
-                                            @foreach ($cpmsuser as $user)
-                                                <option value="Assigned Task to {{ $user->n_penuh }}"
-                                                    label="Assigned Task to {{ $user->n_penuh }}">
-                                                    Assigned Task to {{ $user->n_penuh }}
-                                                </option>
-                                            @endforeach
-                                        @break
-
-                                        @case (6)
-
-                                        @case(7)
-                                            <option value="Update">Update</option>
-                                            <option value="Complete">Completed</option>';
-                                        @break
-
-                                    @endswitch
-                                </select>
-                            </div>
-                        </div>
-                    </div> --}}
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Priority</label>
-                                <select name="level" class="form-control">
+                                <label>Priority <font color="red"> *</font></label>
+                                <select name="level" class="form-control" required>
+                                    <option>--Option--</option>
                                     @foreach ($level as $lev)
                                         <option value="{{ $lev->id }}">{{ $lev->level_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="remarks"> Remarks: </label>
-                                @switch (Auth::user()->role_id)
-                                    @case(1)
-                                        <textarea id="remarks" name="remarks" class="form-control" placeholder="Remarks" maxlength="255"></textarea>
-                                    @break
-
-                                    @case(2)
-                                    @case(8)
-                                        <select id="remarks" name="remarks" class="form-control" placeholder="Remarks"
-                                            maxlength="255">
-                                            <option value="">Please Select</option>
-                                            <option value="Level 1 - Support by Call/Email by {{ Auth::user()->n_penuh }}">
-                                                Level 1 - Support by Call/Email</option>
-                                            <option value="Level 2 - Onsite Support by {{ Auth::user()->n_penuh }}">
-                                                Level 2 - Onsite Support</option>
-                                            <option value="Level 3 - Escalate to Principal by {{ Auth::user()->n_penuh }}">
-                                                Level 3 - Escalate to Principal</option>
-                                            <option value="">No Remarks</option>
-                                        </select>
-                                    @break
-
-                                    @default
-                                        <textarea id="remarks" name="remarks" class="form-control" placeholder="Remarks" maxlength="255"></textarea>
-                                    @break
-                                @endswitch
+                                <label>Client Name:</label>
+                                <input type="text" name="client" class="form-control"
+                                    value="{{ $ticket->requester }}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="remarks"> Task Description: <font color="red"> *</font></label>
+                                <textarea id="remarks" name="remarks" class="form-control" placeholder="Remarks" maxlength="255" required></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="form-group text-center">
                         <div class="btn-group">
-                            <button type="submit" class="btn btn-success" id="add-form-btn">Add</button>
+                            <button type="submit" class="btn btn-success" id="add-form-btn">Assign</button>
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                         </div>
                     </div>
@@ -306,12 +253,8 @@
                     searchable: false
                 },
                 {
-                    data: 'status',
-                    name: 'status'
-                },
-                {
-                    data: 'created_by',
-                    name: 'created_by'
+                    data: 'ticket_status',
+                    name: 'ticket_status'
                 },
                 {
                     data: 'created_at',
