@@ -1,23 +1,30 @@
-@include('template.header')
-@include('template.navbar')
+@extends('layouts.dashboard')
 
-<!-- Content Wrapper. Contains page content -->
+
+@section('sidebar')
+@include('sidebar.sidebar')
+@endsection
+
+
+@section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Ticket Status</h1>
+            <div class="d-flex flex-row justify-content-between align-items-center px-4">
+                <div>
+
+                    <span class="h6 fw-bold">Ticket Status</span>
+
                 </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="">Home</a></li>
-                        <li class="breadcrumb-item"><a href="">Ticket List</a></li>
-                        <li class="breadcrumb-item active">
-                            {{ $ticket->ticket_no }}
-                        </li>
-                    </ol>
+                <div>
+                    <div class="breadcrumb bg-white py-3">
+                        <div class="d-flex flex-row bg-white">
+                            <span class="breadcrumb-item fw-normal"><a href="#">Home</a></span>
+                            <span class="breadcrumb-separator mx-2">/</span>
+                            <span class="breadcrumb-item active fw-normal">Ticket List</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -27,81 +34,125 @@
     <section class="content">
         <div class="row">
             <div class="col-12">
+
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-body">
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-between">
+                                    <a class="btn btn-md btn-primary" href="{{ route('dashboard') }}"  title="Update">
+                                        <i class="fas fa-arrow-circle-left"></i> Back</a>
+                                    <button type="button" class="btn btn-md btn-success" data-toggle="modal"
+                                        data-target="#update-modal" title="Update">
+                                        <i class="fa fa-pencil-alt"></i> Assign Ticket</button>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
-                            <div class="col-md-8 mt-2">
-                                <h3 class="card-title">Ticket {{ $ticket->ticket_no }} </h3>
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold">Ticket {{ $ticket->ticket_no }}</h5>
+                                        <p class="card-text">
+                                        <div class="list-group">
+                                            <a href="/index.php/Ticketing/list?filter=New"
+                                                class="border rounded-2 list-group-item list-group-item-action p-3">
+                                                <div class="row ml-2">
+                                                    <div class="col-lg-4"><span class="fs-14 fw-semibold" style="color:#464F60;">TICKET NO</span></div>
+                                                    <div class="col-lg-8"><span class="fw-normal" style="color:#464F60;">{{ $ticket->ticket_no }}</span></div>
+
+                                                </div>
+
+                                            </a>
+                                            <a href="/index.php/Ticketing/list?filter=InProgress"
+                                                class="border rounded-2 list-group-item list-group-item-action px-3 py-4">
+                                                <div class="row ml-2">
+                                                    <div class="col-lg-4"><span class="fs-14 fw-semibold" style="color:#464F60;">REQUESTER</span></div>
+                                                    <div class="col-lg-8"><span class="fw-normal" style="color:#464F60;">{{ $ticket->requester }}</span></div>
+
+                                                </div>
+                                            </a>
+                                            <a href="/index.php/Ticketing/list?filter=Completed"
+                                                class="border rounded-2 list-group-item list-group-item-action px-3 py-4">
+                                                <div class="row ml-2">
+                                                    <div class="col-lg-4"><span class="fs-14 fw-semibold" style="color:#464F60;">CLIENT NAME</span></div>
+                                                    <div class="col-lg-8"><span class="fw-normal" style="color:#464F60;">{{ $ticket->company->cpny_name }}</span></div>
+
+                                                </div>
+
+                                            </a>
+                                            <a href="/index.php/Ticketing/list?filter=Close"
+                                                class="border rounded-2 list-group-item list-group-item-action px-3 py-4">
+                                                <div class="row ml-2">
+                                                    <div class="col-lg-4"><span class="fs-14 fw-semibold" style="color:#464F60;">PRODUCT NAME</span></div>
+                                                    <div class="col-lg-8"><span class="fw-normal" style="color:#464F60;">{{ $ticket->product ? $ticket->product->product_name : 'N/A' }}</span></div>
+
+                                                </div>
+
+                                            </a>
+                                            <a href="/index.php/Ticketing/list?filter=Close"
+                                                class="border rounded-2 list-group-item list-group-item-action px-3 py-4">
+                                                <div class="row ml-2">
+                                                    <div class="col-lg-4"><span class="fs-14 fw-semibold" style="color:#464F60;">SERVICE</span></div>
+                                                    <div class="col-lg-8"><span class="fw-normal" style="color:#464F60;">{{ $ticket->service->service_name }}</span></div>
+
+                                                </div>
+
+                                            </a>
+                                            <a href="/index.php/Ticketing/list?filter=Close"
+                                                class="border rounded-2 list-group-item list-group-item-action px-3 py-4">
+                                                <div class="row ml-2">
+                                                    <div class="col-lg-4"><span class="fs-14 fw-semibold" style="color:#464F60;">LEVEL</span></div>
+                                                    <div class="col-lg-8"><span class="fw-semibold text-{{ $ticket->level->level_name === 'Low' ? 'success' : 
+                                                                    ($ticket->level->level_name === 'Normal' ? 'warning' : 
+                                                                    ($ticket->level->level_name === 'Urgent' ? 'danger' : 'dark'))  }}">{{ $ticket->level->level_name }}</span></div>
+
+                                                </div>
+
+                                            </a>
+                                            <a href="/index.php/Ticketing/list?filter=Close"
+                                                class="border rounded-2 list-group-item list-group-item-action px-3 py-4">
+                                                <div class="row ml-2">
+                                                    <div class="col-lg-4"><span class="fs-14 fw-semibold" style="color:#464F60;">DESCRIPTION</span></div>
+                                                    <div class="col-lg-8"><span class="fw-normal" style="color:#464F60;">{{ $ticket->ticket_desc }}</span></div>
+
+                                                </div>
+
+                                            </a>
+                                            <a href="/index.php/Ticketing/list?filter=Close"
+                                                class="border rounded-2 list-group-item list-group-item-action px-3 py-4">
+                                                <div class="row ml-2">
+                                                    <div class="col-lg-4"><span class="fs-14 fw-semibold" style="color:#464F60;">ATTACTMENT</span></div>
+                                                    <div class="col-lg-8"><span class="fw-normal" style="color:#464F60;">Close</span></div>
+
+                                                </div>
+
+                                            </a>
+                                        </div>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-4">
-                                <button type="button" class="btn btn-block btn-success" data-toggle="modal"
-                                    data-target="#update-modal" title="Update">
-                                    <i class="fa fa-pencil-alt"></i> Assign Ticket</button>
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold">Ticket History</h5>
+                                        <table id="history_table" class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Ticket status</th>
+                                                    <th>Date</th>
+                                                    <th>Remarks</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-body row">
-                        <div class="col-md-4">
-                            <h4>Ticket Details</h4>
-                            <table class="table table-bordered table-striped">
-                                <tr>
-                                    <th>Ticket No</th>
-                                    {{-- {{ dd($cpmsuser) }} --}}
-                                    <td>{{ $ticket->ticket_no }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Requester</th>
-                                    <td>{{ $ticket->requester }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Client Name</th>
-                                    <td>{{ $ticket->company->cpny_name }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Product Name</th>
-                                    <td>
-                                        @if ($ticket->product)
-                                            {{ $ticket->product->product_name }}
-                                        @else
-                                            N/A
-                                        @endif
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Description</th>
-                                    <td>{{ $ticket->ticket_desc }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Service</th>
-                                    <td>
-                                        {{ $ticket->service->service_name }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Level</th>
-                                    <td>
-                                        {{ $ticket->level->level_name }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Attachment</th>
-                                    <td>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="col-md-8">
-                            <table id="history_table" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Ticket status</th>
-                                        <th>Date</th>
-                                        <th>Remarks</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -150,9 +201,9 @@
                                 <select name="employee[]" class="form-control select2" multiple="multiple"
                                     style="width: 100%" required>
                                     @foreach ($cpmsuser as $user)
-                                        <option value="{{ $user->id }}">
-                                            {{ $user->n_penuh }}
-                                        </option>
+                                    <option value="{{ $user->id }}">
+                                        {{ $user->n_penuh }}
+                                    </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -172,9 +223,9 @@
                                 <select name="service[]" class="form-control select2" multiple="multiple"
                                     style="width: 100%" required>
                                     @foreach ($service as $id => $desc)
-                                        <option value="{{ $id }}">
-                                            {{ $desc }}
-                                        </option>
+                                    <option value="{{ $id }}">
+                                        {{ $desc }}
+                                    </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -185,7 +236,7 @@
                                 <select name="level" class="form-control" required>
                                     <option>--Option--</option>
                                     @foreach ($level as $lev)
-                                        <option value="{{ $lev->id }}">{{ $lev->level_name }}</option>
+                                    <option value="{{ $lev->id }}">{{ $lev->level_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -217,56 +268,7 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>
-<script>
-    function changeRemarks(e) {
-        if (e.value === "Assigned") {
-            var x = document.getElementById("ticketStatus").selectedIndex;
-            var remarks = document.getElementsByTagName("option")[x].label;
-            document.getElementById("remarks").value = remarks;
-        } else {
-            document.getElementById("remarks").value = '';
-        }
-    }
 
-    document.getElementById('ticketStatus').addEventListener('change', function() {
-        changeRemarks(this);
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        let ticketNo = @json($ticket->ticket_no);
-        let encodedTicketNo = encodeURIComponent(ticketNo);
+@include('script.ticket-status')
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $('#history_table').DataTable({
-            processing: true,
-            ajax: `/ticket_status/${encodedTicketNo}/histories`,
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex',
-                    orderable: true,
-                    searchable: false
-                },
-                {
-                    data: 'ticket_status',
-                    name: 'ticket_status'
-                },
-                {
-                    data: 'created_at',
-                    name: 'created_at',
-                },
-                {
-                    data: 'remarks',
-                    name: 'remarks'
-                },
-            ]
-        });
-    });
-</script>
-
-@include('template.footer')
+@endsection

@@ -5,7 +5,7 @@
 
      <ul class="list-unstyled components mx-3 rounded-4">
          <li class="active rounded-4">
-             <a href="#"><i class="fas fa-th-large mr-2"></i>Dashboard</a>
+             <a href="{{ route('dashboard') }}"><i class="fas fa-th-large mr-2"></i>Dashboard</a>
 
          </li>
          <li>

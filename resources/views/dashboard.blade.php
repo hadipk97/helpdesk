@@ -1,7 +1,11 @@
 @extends('layouts.dashboard')
+
+
 @section('sidebar')
 @include('sidebar.sidebar')
 @endsection
+
+
 @section('content')
 <div class="content">
     <!-- Content Wrapper. Contains page content -->
@@ -339,14 +343,19 @@ License No:
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>
-<div id="edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<!-- Edit modal template -->
+<div id="edit-modal" class="modal fade rounded-8" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="text-center bg-info p-3">
-                <h4 class="modal-title text-white" id="editModalLabel">Edit Ticket</h4>
-            </div>
+
             <div class="modal-body">
-                <form action="{{ route('ticket_edit') }}" method="POST" id="edit-form" class="pl-3 pr-3">
+                <div class="d-flex flex-row justify-content-between p-3">
+                    <h5 class="modal-title fw-bold" id="editModalLabel">Edit Ticket</h5>
+                    <button type="button" class="btn-transparent" data-dismiss="modal">
+                        <i class="h5 fa fa-times"></i>
+                    </button>
+                </div>
+                <form action="{{ route('ticket_edit') }}" method="POST" id="edit-form" class="px-4 mt-4">
                     @csrf
                     <div class="row">
                         <input type="hidden" id="ticketId" name="id" class="form-control" placeholder="Id"
@@ -354,7 +363,7 @@ License No:
                         <input type="hidden" id="createdBy" name="createdBy" maxlength="255"
                             value="{{ Auth::user()->n_penuh }}" readonly="readonly">
                     </div>
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="requester"> Requester <span class="text-danger">*</span> :</label>
@@ -365,7 +374,7 @@ License No:
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="clientId"> Client: </label>
-                                <select id="clientId" name="clientId" class="custom-select">
+                                <select id="clientId" name="clientId" class="form-control">
                                     @foreach ($company as $comp)
                                     <option value="{{ $comp->id }}">{{ $comp->cpny_name }}</option>
                                     @endforeach
@@ -380,7 +389,7 @@ License No:
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Type of Product: </label>
@@ -392,11 +401,12 @@ License No:
                             </div>
                         </div>
                     </div>
-                    <div class="row" id="hId" style="display: none">
+
+                    <div class="row mb-2" id="hId" style="display: none">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="productId"> Product Name: </label>
-                                <select id="productId" name="productId" class="custom-select">
+                                <select id="productId" name="productId" class="form-control">
                                     @foreach ($product as $prod)
                                     <option value="{{ $prod->id }}">{{ $prod->product_name }}</option>
                                     @endforeach
@@ -404,25 +414,7 @@ License No:
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="ticketDesc"> Description: </label>
-                                <textarea id="ticketDesc" name="ticketDesc" class="form-control compose-textarea" rows="8" cols="10">
-                                    Serial No:
-                                    License No:
-                                </textarea>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="ticketDesc"> Attachment: </label>
-                                <input id="attachment-1" name="attachment[]" type="file" class="file"
-                                    data-show-upload="true" data-show-caption="true" multiple>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="serviceId"> Service: </label>
@@ -444,10 +436,31 @@ License No:
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="btn-group">
-                            <button type="submit" class="btn btn-success" id="add-form-btn">Add</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <div class="row mb-2">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="ticketDesc"> Description: </label>
+                                <textarea id="ticketDesc" name="ticketDesc" class="form-control compose-textarea" rows="8" cols="10">
+Serial No:
+License No:
+</textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="ticketDesc"> Attachment: </label>
+                                <input id="attachment-1" name="attachment[]" type="file" class="file"
+                                    data-show-upload="true" data-show-caption="true" multiple>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-lg-6">
+                            <button type="button" class="btn btn-outline-light w-100 btn-lg rounded-8" data-dismiss="modal">Cancel</button>
+                        </div>
+                        <div class="col-lg-6">
+                            <button type="submit" class="btn btn-success w-100 btn-lg rounded-8" id="add-form-btn">Save</button>
                         </div>
                     </div>
                 </form>
@@ -456,83 +469,6 @@ License No:
     </div><!-- /.modal-dialog -->
 </div>
 
-<script>
-    $(document).ready(function() {
-        $('#sidebarCollapse').on('click', function() {
-            $('#sidebar').toggleClass('active');
-        });
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-{{-- <!-- jQuery (required for Select2) -->
-<script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script> --}}
-
-<!-- Select2 JS -->
-<script src="{{ asset('assets/js/select2.min.js') }}"></script>
-<script>
-    // $(document).ready(function() {
-    //     $('.select2').select2();
-    // });
-
-    document.addEventListener("DOMContentLoaded", function() {
-        const sidebarToggle = document.getElementById("sidebarCollapse");
-        const sidebar = document.getElementById("sidebar");
-
-        // Hide by default on small screens
-        if (window.innerWidth <= 768) {
-            sidebar.classList.remove("active"); // ensure hidden initially
-        }
-
-        sidebarToggle.addEventListener("click", function() {
-            sidebar.classList.toggle("active");
-        });
-    });
-</script>
-<script>
-    @if(Session::has('toastr'))
-    var toastrData = @json(Session::get('toastr'));
-    toastr[toastrData.type](toastrData.message);
-    @endif
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function(event) {
-
-        const showNavbar = (toggleId, navId, bodyId, headerId) => {
-            const toggle = document.getElementById(toggleId),
-                nav = document.getElementById(navId),
-                bodypd = document.getElementById(bodyId),
-                headerpd = document.getElementById(headerId)
-
-            // Validate that all variables exist
-            if (toggle && nav && bodypd && headerpd) {
-                toggle.addEventListener('click', () => {
-                    // show navbar
-                    nav.classList.toggle('show')
-                    // change icon
-                    toggle.classList.toggle('bx-x')
-                    // add padding to body
-                    bodypd.classList.toggle('body-pd')
-                    // add padding to header
-                    headerpd.classList.toggle('body-pd')
-                })
-            }
-        }
-
-        showNavbar('header-toggle', 'nav-bar', 'body-pd', 'header')
-
-        /*===== LINK ACTIVE =====*/
-        const linkColor = document.querySelectorAll('.nav_link')
-
-        function colorLink() {
-            if (linkColor) {
-                linkColor.forEach(l => l.classList.remove('active'))
-                this.classList.add('active')
-            }
-        }
-        linkColor.forEach(l => l.addEventListener('click', colorLink))
-
-        // Your code to run since DOM is loaded and ready
-    });
-</script>
+@include('script.dashboard')
 
 @endsection
