@@ -123,7 +123,7 @@
                                             <a href="/index.php/Ticketing/list?filter=Close"
                                                 class="border rounded-2 list-group-item list-group-item-action px-3 py-4">
                                                 <div class="row ml-2">
-                                                    <div class="col-lg-4"><span class="fs-14 fw-semibold" style="color:#464F60;">ATTACTMENT</span></div>
+                                                    <div class="col-lg-4"><span class="fs-14 fw-semibold" style="color:#464F60;">ATTACHMENT</span></div>
                                                     <div class="col-lg-8"><span class="fs-14 fw-normal" style="color:#464F60;">Close</span></div>
 
                                                 </div>

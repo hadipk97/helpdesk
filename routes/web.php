@@ -10,6 +10,7 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InfoCenterController;
 use App\Http\Controllers\NotificationController;
 
 /*
@@ -78,3 +79,6 @@ Route::get('/group', [GroupController::class, 'index'])->name('group');
 Route::get('/get_group', [GroupController::class, 'getGroup'])->name('get_group');
 Route::post('add-group', [GroupController::class, 'add'])->name('group_add');
 Route::post('edit-group', [GroupController::class, 'edit'])->name('group_edit');
+
+//Info Center
+Route::get('/info-center', [InfoCenterController::class,'index'])->name('info-center');

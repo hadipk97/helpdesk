@@ -9,7 +9,7 @@
 
          </li>
          <li>
-             <a href="#"><i class="fas fa-info-circle mr-2"></i>Info Centre</a>
+             <a href="{{ route('info-center') }}"><i class="fas fa-info-circle mr-2"></i>Info Center</a>
          </li>
 
          <li>
