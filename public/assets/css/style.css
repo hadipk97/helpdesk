@@ -14,6 +14,10 @@ body {
     font-size: 14px;
 }
 
+.fs-12 {
+    font-size: 12px;
+}
+
 .rounded-2 {
     border-radius: 2px !important;
 }
@@ -511,7 +515,7 @@ table.dataTable {
   table.dataTable tbody tr {
     background-color: #FFFFFF;
     color: #343a40;   /* padding-y: 12px, padding-x: 24px */
-    font-size: 12px;
+    font-size: 14px;
     letter-spacing: 4%;
     text-transform: uppercase; 
   }

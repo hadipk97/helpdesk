@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html>
-
 <head>
     <title>Support Ticketing System </title>
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}">
@@ -48,7 +45,3 @@
 
     <!-- Select2 CSS -->
     <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" />
-
-</head>
-
-<body>

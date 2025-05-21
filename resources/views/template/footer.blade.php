@@ -9,8 +9,27 @@
         $('.select2').select2();
     });
 </script>
+<script>
+    (function($) {
 
-</body>
+        "use strict";
+
+        var fullHeight = function() {
+
+            $('.js-fullheight').css('height', $(window).height());
+            $(window).resize(function() {
+                $('.js-fullheight').css('height', $(window).height());
+            });
+
+        };
+        fullHeight();
+
+        $('#sidebarCollapse').on('click', function() {
+            $('#sidebar').toggleClass('active');
+        });
+
+    })(jQuery);
+</script>
 <script>
     @if(Session::has('toastr'))
     var toastrData = @json(Session::get('toastr'));
@@ -57,5 +76,3 @@
         // Your code to run since DOM is loaded and ready
     });
 </script>
-
-</html>

@@ -43,14 +43,14 @@
                                 <div class="d-flex justify-content-between">
                                     <a class="btn btn-md btn-primary" href="{{ route('dashboard') }}"  title="Update">
                                         <i class="fas fa-arrow-circle-left"></i> Back</a>
-                                    <button type="button" class="btn btn-md btn-success" data-toggle="modal"
+                                    <button type="button" class="btn btn-md btn-warning text-white" data-toggle="modal"
                                         data-target="#update-modal" title="Update">
-                                        <i class="fa fa-pencil-alt"></i> Assign Ticket</button>
+                                        <i class="fa fa-user-edit"></i> Assign Ticket</button>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-5">
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title fw-bold">Ticket {{ $ticket->ticket_no }}</h5>
@@ -60,7 +60,7 @@
                                                 class="border rounded-2 list-group-item list-group-item-action p-3">
                                                 <div class="row ml-2">
                                                     <div class="col-lg-4"><span class="fs-14 fw-semibold" style="color:#464F60;">TICKET NO</span></div>
-                                                    <div class="col-lg-8"><span class="fw-normal" style="color:#464F60;">{{ $ticket->ticket_no }}</span></div>
+                                                    <div class="col-lg-8"><span class="fs-14 fw-normal" style="color:#464F60;">{{ $ticket->ticket_no }}</span></div>
 
                                                 </div>
 
@@ -69,7 +69,7 @@
                                                 class="border rounded-2 list-group-item list-group-item-action px-3 py-4">
                                                 <div class="row ml-2">
                                                     <div class="col-lg-4"><span class="fs-14 fw-semibold" style="color:#464F60;">REQUESTER</span></div>
-                                                    <div class="col-lg-8"><span class="fw-normal" style="color:#464F60;">{{ $ticket->requester }}</span></div>
+                                                    <div class="col-lg-8"><span class="fs-14 fw-normal" style="color:#464F60;">{{ $ticket->requester }}</span></div>
 
                                                 </div>
                                             </a>
@@ -77,7 +77,7 @@
                                                 class="border rounded-2 list-group-item list-group-item-action px-3 py-4">
                                                 <div class="row ml-2">
                                                     <div class="col-lg-4"><span class="fs-14 fw-semibold" style="color:#464F60;">CLIENT NAME</span></div>
-                                                    <div class="col-lg-8"><span class="fw-normal" style="color:#464F60;">{{ $ticket->company->cpny_name }}</span></div>
+                                                    <div class="col-lg-8"><span class="fs-14 fw-normal" style="color:#464F60;">{{ $ticket->company->cpny_name }}</span></div>
 
                                                 </div>
 
@@ -86,7 +86,7 @@
                                                 class="border rounded-2 list-group-item list-group-item-action px-3 py-4">
                                                 <div class="row ml-2">
                                                     <div class="col-lg-4"><span class="fs-14 fw-semibold" style="color:#464F60;">PRODUCT NAME</span></div>
-                                                    <div class="col-lg-8"><span class="fw-normal" style="color:#464F60;">{{ $ticket->product ? $ticket->product->product_name : 'N/A' }}</span></div>
+                                                    <div class="col-lg-8"><span class="fs-14 fw-normal" style="color:#464F60;">{{ $ticket->product ? $ticket->product->product_name : 'N/A' }}</span></div>
 
                                                 </div>
 
@@ -95,7 +95,7 @@
                                                 class="border rounded-2 list-group-item list-group-item-action px-3 py-4">
                                                 <div class="row ml-2">
                                                     <div class="col-lg-4"><span class="fs-14 fw-semibold" style="color:#464F60;">SERVICE</span></div>
-                                                    <div class="col-lg-8"><span class="fw-normal" style="color:#464F60;">{{ $ticket->service->service_name }}</span></div>
+                                                    <div class="col-lg-8"><span class="fs-14 fw-normal" style="color:#464F60;">{{ $ticket->service->service_name }}</span></div>
 
                                                 </div>
 
@@ -104,7 +104,7 @@
                                                 class="border rounded-2 list-group-item list-group-item-action px-3 py-4">
                                                 <div class="row ml-2">
                                                     <div class="col-lg-4"><span class="fs-14 fw-semibold" style="color:#464F60;">LEVEL</span></div>
-                                                    <div class="col-lg-8"><span class="fw-semibold text-{{ $ticket->level->level_name === 'Low' ? 'success' : 
+                                                    <div class="col-lg-8"><span class="fs-14 fw-semibold text-{{ $ticket->level->level_name === 'Low' ? 'success' : 
                                                                     ($ticket->level->level_name === 'Normal' ? 'warning' : 
                                                                     ($ticket->level->level_name === 'Urgent' ? 'danger' : 'dark'))  }}">{{ $ticket->level->level_name }}</span></div>
 
@@ -115,7 +115,7 @@
                                                 class="border rounded-2 list-group-item list-group-item-action px-3 py-4">
                                                 <div class="row ml-2">
                                                     <div class="col-lg-4"><span class="fs-14 fw-semibold" style="color:#464F60;">DESCRIPTION</span></div>
-                                                    <div class="col-lg-8"><span class="fw-normal" style="color:#464F60;">{{ $ticket->ticket_desc }}</span></div>
+                                                    <div class="col-lg-8"><span class="fs-14 fw-normal" style="color:#464F60;">{{ $ticket->ticket_desc }}</span></div>
 
                                                 </div>
 
@@ -124,7 +124,7 @@
                                                 class="border rounded-2 list-group-item list-group-item-action px-3 py-4">
                                                 <div class="row ml-2">
                                                     <div class="col-lg-4"><span class="fs-14 fw-semibold" style="color:#464F60;">ATTACTMENT</span></div>
-                                                    <div class="col-lg-8"><span class="fw-normal" style="color:#464F60;">Close</span></div>
+                                                    <div class="col-lg-8"><span class="fs-14 fw-normal" style="color:#464F60;">Close</span></div>
 
                                                 </div>
 
@@ -134,7 +134,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-7">
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title fw-bold">Ticket History</h5>
@@ -144,7 +144,7 @@
                                                     <th>No</th>
                                                     <th>Ticket status</th>
                                                     <th>Date</th>
-                                                    <th>Remarks</th>
+                                                    <th style="width:250px;">Remarks</th>
                                                 </tr>
                                             </thead>
                                         </table>
