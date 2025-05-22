@@ -335,6 +335,7 @@
                                     </select>
                                 </div>
                             </div>
+                            <input type='hidden' id="role-id" name="id" class="form-control"></input>
                         </div>
                         <div class="form-group text-center">
                             <div class="btn-group">

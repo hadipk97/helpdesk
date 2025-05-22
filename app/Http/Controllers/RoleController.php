@@ -70,27 +70,20 @@ class RoleController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Role $role)
+    public function update(Request $request)
     {
-        //
-    }
+        $id = $request->id;
+        $role = Role::findOrFail($id);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Role $role)
-    {
-        //
+        $data = array(
+            'role' => $request->role_name,
+            'role_desc' => $request->role_desc,
+            'role_stat' => $request->isActive,
+        );
+        // dd($id);
+        $role->update($data);
+        Session::flash('toastr', ['type' => 'success', 'message' => 'Role updated successfully!']);
+        return redirect()->route('users');
     }
 
     /**

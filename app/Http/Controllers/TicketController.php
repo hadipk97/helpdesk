@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Task;
 use App\Models\User;
 use App\Models\Level;
 use App\Models\Ticket;
@@ -220,24 +221,23 @@ class TicketController extends Controller
             'created_by' => Auth::user()->username,
         ]);
 
-        DB::connection('mysql')
-            ->table('dt_task')->insert(
-                [
-                    'task_no' => $request->task_no,
-                    'task_date' => $request->start_date,
-                    'task_date_end' => $request->end_date,
-                    'task_time' => $request->appointment_time,
-                    'task_desc' => $request->remarks,
-                    'task_level' => $request->priority,
-                    'task_assign' => is_array($request->employee) ? json_encode($request->employee) : $request->employee,
-                    'task_stat' => '1',
-                    'task_client' => $request->client,
-                    'task_client_pic' => $request->pic,
-                    'task_product' => $request->product,
-                    'task_type' => $request->type,
-                    'assign_by' => Auth::user()->id
-                ]
-            );
+        Task::create(
+            [
+                'task_no' => $request->task_no,
+                'task_date' => $request->start_date,
+                'task_date_end' => $request->end_date,
+                'task_time' => $request->appointment_time,
+                'task_desc' => $request->remarks,
+                'task_level' => $request->priority,
+                'task_assign' => is_array($request->employee) ? json_encode($request->employee) : $request->employee,
+                'task_stat' => '1',
+                'task_client' => $request->client,
+                'task_client_pic' => $request->pic,
+                'task_product' => $request->product,
+                'task_type' => $request->type,
+                'assign_by' => Auth::user()->id
+            ]
+        );
 
         Session::flash('toastr', ['type' => 'success', 'message' => 'Ticket has been updated successfully!']);
         return redirect()->route('ticket_status', ['id' => $request->hdTicketId]);

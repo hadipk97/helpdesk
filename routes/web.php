@@ -73,6 +73,8 @@ Route::get('/ticket_status/{id}', [TicketController::class, 'ticket_status'])->n
 Route::get('ticket_status/{ticket_no}/histories', [TicketController::class, 'getHistories'])->where('ticket_no', '.*')->name('ticket.histories');
 Route::post('ticket_assign', [TicketController::class, 'ticket_assign'])->name('ticket_assign');
 Route::post('ticket_edit', [TicketController::class, 'update'])->name('ticket_edit');
+Route::post('ticket_update', [TicketController::class, 'ticket_update'])->name('ticket_update');
+Route::post('ticket_delete', [TicketController::class, 'destroy'])->name('ticket_delete');
 
 //Group
 Route::get('/group', [GroupController::class, 'index'])->name('group');
