@@ -1,3 +1,10 @@
+<script>
+    $(document).ready(function() {
+        $('#sidebarCollapse').on('click', function() {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 {{-- <!-- jQuery (required for Select2) -->
 <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script> --}}
@@ -7,6 +14,25 @@
 <script>
     $(document).ready(function() {
         $('.select2').select2();
+    });
+</script>
+<script>
+    // $(document).ready(function() {
+    //     $('.select2').select2();
+    // });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const sidebarToggle = document.getElementById("sidebarCollapse");
+        const sidebar = document.getElementById("sidebar");
+
+        // Hide by default on small screens
+        if (window.innerWidth <= 768) {
+            sidebar.classList.remove("active"); // ensure hidden initially
+        }
+
+        sidebarToggle.addEventListener("click", function() {
+            sidebar.classList.toggle("active");
+        });
     });
 </script>
 <script>

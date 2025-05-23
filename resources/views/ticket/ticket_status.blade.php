@@ -41,7 +41,7 @@
                         <div class="row mb-3">
                             <div class="col-12">
                                 <div class="d-flex justify-content-between">
-                                    <a class="btn btn-md btn-primary" href="{{ route('dashboard') }}"  title="Update">
+                                    <a class="btn btn-md btn-primary" href="{{ route('dashboard') }}" title="Update">
                                         <i class="fas fa-arrow-circle-left"></i> Back</a>
                                     <button type="button" class="btn btn-md btn-warning text-white" data-toggle="modal"
                                         data-target="#update-modal" title="Update">
@@ -159,13 +159,16 @@
         </div>
     </section>
 </div>
-<div id="update-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="update-modal" class="modal fade rounded-8" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="text-center bg-info p-3">
-                <h4 class="modal-title text-white" id="info-header-modalLabel">Assign Ticket</h4>
-            </div>
             <div class="modal-body">
+                <div class="d-flex flex-row justify-content-between p-3">
+                    <h5 class="modal-title fw-bold" id="info-header-modalLabel">Assign Ticket</h5>
+                    <button type="button" class="btn-transparent" data-dismiss="modal">
+                        <i class="h5 fa fa-times"></i>
+                    </button>
+                </div>
                 <form action="{{ route('ticket_assign') }}" method="post" class="pl-3 pr-3">
                     @csrf
                     <div class="row">
@@ -174,20 +177,30 @@
                         <input type="hidden" id="ticket_no" name="priority" value="<?= $ticket->level_id ?>">
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6 pr-5 pl-4">
                             <div class="form-group">
                                 <label>Task No:</label>
                                 <input type="text" name="task_no" value="{{ $taskNo }}" class="form-control"
                                     readonly>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6 pl-5 pr-4">
+                            <div class="form-group">
+                                <label>Client Name:</label>
+                                <input type="text" name="client" class="form-control"
+                                    value="{{ $ticket->requester }}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 pr-5 pl-4">
                             <div class="form-group">
                                 <label for="createdAt"> Start Date: <font color="red"> *</font></label>
                                 <input type="date" id="createdAt" name="start_date" class="form-control" required>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6 pl-5 pr-4">
                             <div class="form-group">
                                 <label for="createdAt"> End Date: <font color="red"> *</font></label>
                                 <input type="date" id="createdAt" name="end_date" class="form-control" required>
@@ -195,7 +208,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 pr-5 pl-4">
                             <div class="form-group">
                                 <label>Employee Name <font color="red"> *</font></label>
                                 <select name="employee[]" class="form-control select2" multiple="multiple"
@@ -208,7 +221,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 pl-5 pr-4">
                             <div class="form-group">
                                 <label>Appointment Time <font color="red"> *</font></label>
                                 <input type="time" name="appointment_time" class="form-control timepicker"
@@ -217,10 +230,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 pr-5 pl-4">
                             <div class="form-group">
                                 <label>Service Type <font color="red"> *</font></label>
-                                <select name="service[]" class="form-control select2" multiple="multiple"
+                                <select name="service[]" class="form-control select2 select2-service" multiple="multiple"
                                     style="width: 100%" required>
                                     @foreach ($service as $id => $desc)
                                     <option value="{{ $id }}">
@@ -230,7 +243,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 pl-5 pr-4">
                             <div class="form-group">
                                 <label>Priority <font color="red"> *</font></label>
                                 <select name="level" class="form-control" required>
@@ -243,24 +256,19 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Client Name:</label>
-                                <input type="text" name="client" class="form-control"
-                                    value="{{ $ticket->requester }}">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12 px-4">
                             <div class="form-group">
                                 <label for="remarks"> Task Description: <font color="red"> *</font></label>
                                 <textarea id="remarks" name="remarks" class="form-control" placeholder="Remarks" maxlength="255" required></textarea>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group text-center">
-                        <div class="btn-group">
-                            <button type="submit" class="btn btn-success" id="add-form-btn">Assign</button>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <div class="row mt-4 px-5">
+                        <div class="col-lg-6">
+                            <button type="button" class="btn btn-outline-light w-100 btn-lg rounded-8" data-dismiss="modal">Cancel</button>
+                        </div>
+                        <div class="col-lg-6">
+                            <button type="submit" class="btn btn-success w-100 btn-lg rounded-8" id="add-form-btn">Assign</button>
                         </div>
                     </div>
                 </form>

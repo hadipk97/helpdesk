@@ -55,7 +55,7 @@
 
             </div>
             <div class="col-lg-6 col-12 rounded-10 d-flex flex-column align-items-center justify-content-center position-relative"
-                style="background-image: url({{ asset('assets/prismakhas/bg-login.png') }}); background-size: cover; background-position: center; height: 100vh;">
+                style="background-image: url({{ asset('assets/prismakhas/bg-new.png') }}); background-size: cover; background-position: center; height: 100vh;">
                 <div class="position-absolute" style="top:15px; right:15px;">
 
                     <ul class="nav nav-pills border-0 bg-light rounded-pill px-2 py-1 shadow-sm" style="width: max-content; font-size: 0.85rem;">

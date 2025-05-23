@@ -23,7 +23,7 @@
                             <div class="d-flex flex-row bg-white">
                                 <span class="breadcrumb-item fw-normal"><a href="#">Home</a></span>
                                 <span class="breadcrumb-separator mx-2">/</span>
-                                <span class="breadcrumb-item active fw-normal">Ticketing</span>
+                                <span class="breadcrumb-item active fw-normal">Info Center</span>
                             </div>
                         </div>
                     </div>
@@ -56,19 +56,14 @@
                                 <thead>
                                     <tr>
 
-                                        <th>Ticket No.</th>
-                                        <th>Requester</th>
-                                        <!-- <th>Client Name</th> -->
-                                        <th>Ticket subject</th>
-                                        <!-- <th>Product id</th> -->
-                                        <!-- <th>Ticket desc</th> -->
-                                        <th>Service</th>
-                                        <th>Level </th>
-                                        <th>Ticket Status</th>
+                                        <th>No.</th>
+                                        <th>Title</th>
+                                        <th>Category</th>
+                                        <th>Description</th>
+                                        <th>Created By</th>
                                         <th>Created Date</th>
-                                        <th>Action
-                                            {{-- <th>Deadline Date</th> --}}
-                                            <!-- <th>Deleted date</th> -->
+                                        <th>Action</th>
+                                            
                                     </tr>
                                 </thead>
                                 <tbody>

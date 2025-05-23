@@ -9,9 +9,11 @@ use App\Http\Controllers\LevelController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InfoCenterController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,3 +86,9 @@ Route::post('edit-group', [GroupController::class, 'edit'])->name('group_edit');
 
 //Info Center
 Route::get('/info-center', [InfoCenterController::class,'index'])->name('info-center');
+
+//Reporting
+Route::get('/reporting', [ReportController::class, 'index'])->name('reporting');
+
+//Client
+Route::get('/client', [ClientController::class, 'index'])->name('client');
